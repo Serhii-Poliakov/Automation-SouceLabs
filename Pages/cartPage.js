@@ -41,7 +41,7 @@ this.continueShoppingButton = page.locator('#continue-shopping');
 this.checkoutButton = page.locator('#checkout');
 }
 
-    // Validate the header content on this page
+// Validate the header content on this page
 async validateItemsPageHeader(){
     await expect(this.title).toBeVisible();
     await expect(this.title).toHaveText('Swag Labs');
