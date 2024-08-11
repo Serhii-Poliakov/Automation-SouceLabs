@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 const checkoutDetails = require('../Data/checkoutDetails').default;
 
 //This page is created to mantain all locators on the Items page
-export class CheckoutPage {
+export class CheckoutInformationPage {
 
     constructor(page) {
         this.page = page;

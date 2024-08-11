@@ -1,8 +1,8 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../Pages/loginPage';
 import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
-import { CheckoutPage } from '../../Pages/checkoutInformationPage';
+import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 
 
 const pageUrl = require('../../Data/pageUrl').default;
@@ -16,11 +16,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateItemsPageHeader();
+    await checkoutInformationPage.validateItemsPageHeader();
 });
 
   // TC: 29 - Check burger menu form (all elements are present, close button)
@@ -28,11 +28,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateBurgerMenu();
+    await checkoutInformationPage.validateBurgerMenu();
 });
 
   // TC: 30 - Check logout functionality from burger menu
@@ -40,11 +40,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateLogout();
+    await checkoutInformationPage.validateLogout();
     await loginPage.validateLoginForm();
 });
 
@@ -53,11 +53,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateAboutFunctionality();
+    await checkoutInformationPage.validateAboutFunctionality();
 });
 
  // TC: 32 Check checkout form
@@ -65,11 +65,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateCheckoutFrom();
+    await checkoutInformationPage.validateCheckoutFrom();
  });
 
   // TC: 33 Check checkout details with empty data
@@ -77,11 +77,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateCheckoutFormWithEmptyData();
+    await checkoutInformationPage.validateCheckoutFormWithEmptyData();
  });
 
  // TC: 34 Check checkout details with empty First name
@@ -89,11 +89,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateCheckoutFormWithEmptyFirstName();
+    await checkoutInformationPage.validateCheckoutFormWithEmptyFirstName();
  });
 
  // TC: 35 Check checkout details with empty Last name
@@ -101,11 +101,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateCheckoutFormWithEmptyLastName();
+    await checkoutInformationPage.validateCheckoutFormWithEmptyLastName();
  });
 
  // TC: 36 Check checkout details with empty zip code
@@ -113,11 +113,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateCheckoutFormWithEmptyZipCode();
+    await checkoutInformationPage.validateCheckoutFormWithEmptyZipCode();
  });
 
  // TC: 37 Check the button for clearing checkout form from errors
@@ -125,11 +125,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validateCleaningErrorButton();
+    await checkoutInformationPage.validateCleaningErrorButton();
  });
 
  // TC: 38 Check checkout details with all correct data
@@ -137,21 +137,22 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validatedContinueButton();
+    await checkoutInformationPage.validatedContinueButton();
  });
 
- // TC: 39 Check checkout details with all correct data
+ // TC: 39 Check cancel functionality 
  test('TC:39', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const itemsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await itemsPage.validatedAddToCartButton();
     await cartPage.validatedCheckoutButton();
-    await checkoutPage.validatedCancelButton();
+    await checkoutInformationPage.validatedCancelButton();
+    await expect(cartPage.cartContainer).toBeVisible();
  });
