@@ -43,7 +43,7 @@ this.continueButton = page.locator('#continue');
 }
 
     // Validate the header content on the item page
-async validateItemsPageHeader(){
+async validateproductsPageHeader(){
     await expect(this.title).toBeVisible();
     await expect(this.title).toHaveText('Swag Labs');
     console.log("Title: Swag Labs is visible");

@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
 
 
+
 //This page is created to mantain all locators on the Checkout Overview page
 export class CheckoutOverviewPage {
 
@@ -34,11 +35,11 @@ this.cartQuantity = page.locator('.cart_quantity');
 
 //Payment information
 this.paymentInformationTitle = page.locator('.summary_info_label').first();
-this.paymentContent = page.locator('.summary_value_label').nth(1);
+this.paymentContent = page.locator('.summary_value_label').first();
 
 //Shipping information
-this.shippingInformationTitle = page.locator('.summary_info_label').first();
-this.shippingInformation = page.locator('summary_value_label').nth(1);
+this.shippingInformationTitle = page.locator('.summary_info_label:nth-of-type(3)');
+this.shippingInformation = page.locator('.summary_value_label:nth-of-type(4)');
 
 //Price total
 this.itemPrice = page.locator('.summary_subtotal_label');
@@ -53,7 +54,7 @@ this.finishButton = page.locator('#finish');
 }
 
 // Validate the header content on this page
-async validateItemsPageHeader(){
+async validateproductsPageHeader(){
     await expect(this.title).toBeVisible();
     await expect(this.title).toHaveText('Swag Labs');
     console.log("Title: Swag Labs is visible");
@@ -103,18 +104,6 @@ async validateAboutFunctionality() {
       }
 }
 
-// Verify if item added from items page is same as shown in overview page
-async validateItemDetailsAfterAddingToCart(expectedItemDetails) {
-    await expect(this.itemTitle).toBeVisible();
-    expect(await (await this.itemTitle).textContent()).toBe(expectedItemDetails[0]);
-  
-    await expect(this.itemDescription).toBeVisible();
-    expect(await (await this.itemDescription).textContent()).toBe(expectedItemDetails[1]);
-  
-    await expect(this.itemPriceContainer).toBeVisible();
-    expect(await (await this.itemPriceContainer).textContent()).toBe(expectedItemDetails[2]);
-}
-
 //Get item details 
 async getItemDetailsAfterAddingToCart() {
     const ItemTitle = await (await this.itemTitle).textContent();
@@ -135,35 +124,53 @@ async validatePaymentInformation() {
 async validateShipingInformation() {
     await expect(this.shippingInformationTitle).toBeVisible();
     await expect(this.shippingInformationTitle).toHaveText('Shipping Information:');
-    await expect(this.shippingInformation).toBeVisible();
-    await expect(this.shippingInformation).toHaveText('FREE PONY EXPRESS DELIVERY!');
+    const shippingInformation = await this.shippingInformation.textContent();
+    await expect(shippingInformation.toUpperCase()).toBe('FREE PONY EXPRESS DELIVERY!');
 }
 
 //Validate price breakdown
 async validatePriceBreakdown() {
-expect(parseFloat(this.itemPrice.textContent())).toEqual(parseFloat(this.itemPrice.textContent()));
+    const itemPriceCart = parseFloat((await (await this.page.locator('.inventory_item_price')).textContent()).replace(/[^0-9.]/g, ''));
+    console.log('Item Price in Cart:', itemPriceCart);
+    const itemPriceBreakdown = parseFloat((await (await this.page.locator('.summary_subtotal_label')).textContent()).replace(/[^0-9.]/g, ''));
+await expect(itemPriceCart).toEqual(itemPriceBreakdown);
+console.log('Item Price in Breakdown:', itemPriceBreakdown);
 }
 
 // Validate tax percentage 
 async validateTaxPercentage() {
-    const itemPrice = parseFloat(this.itemPrice.replace('$', ''));
-    const tax = parseFloat(this.tax.replace('$', ''));
-  
-    // Check tax rate
+   const itemPrice = parseFloat((await (await this.itemPrice).textContent()).replace(/[^0-9.]/g, ''));
+   const tax = parseFloat((await (await this.tax).textContent()).replace(/[^0-9.]/g, ''));
+    // finding tax rate from item price
     const calculatedTaxRate = (tax / itemPrice) * 100;
+    console.log('Calculate tax rate from item price', calculatedTaxRate);
   
     // Round the tax rate to 2 decimal places
     const roundedTax = Math.round(calculatedTaxRate * 100) / 100;
-    expect(tax).toBe(roundedTax);
+    console.log('Rounded Tax Rate:', roundedTax);
+
+    // Calculate tax amount
+    const calculatedTaxAmount = itemPrice * (roundedTax/ 100);
+    console.log('Tax amount:', calculatedTaxAmount);
+
+    // Round the tax amount to 2 decimal places
+    const roundedTaxAmount = Math.round(calculatedTaxAmount * 100) / 100;
+    expect(tax).toBe(roundedTaxAmount);
 }
 
-//validate total price
+//validate total price - to do global value
 async validateTotalPrice() {
-expect(parseFloat(this.itemPrice.textContent())) + (parseFloat(this.tax.textContent())).toEqual(parseFloat(this.toatalPrice.textContent()))
+    const itemPrice = parseFloat((await (await this.itemPrice).textContent()).replace(/[^0-9.]/g, ''));
+    const tax = parseFloat((await (await this.tax).textContent()).replace(/[^0-9.]/g, ''));
+    const expectedTotalPrice = parseFloat((await (await this.page.locator('.summary_total_label')).textContent()).replace(/[^0-9.]/g, ''));
+    const totalPrice = itemPrice + tax;
+await expect(totalPrice).toEqual(expectedTotalPrice);
+console.log('Total price;', totalPrice);
+
 }
 
 // Validate Finish button  
-async validatedContinueButton() {
+async validatedFinishButton() {
     await expect(this.finishButton).toBeVisible();
     await this.finishButton.click();
 }

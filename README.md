@@ -110,7 +110,19 @@ Checkout information Page:
 38) Check checkout details with all correct data
 39) Check checkout details with all correct data
 
-Checkout Overview Page: - to be done
+Checkout Overview Page: 
+40) Check that header is present
+41) Check that burger menu is present
+42) Check logout functionality from burger menu
+43) Check about functionality from burger menu
+44) Check item added from items page is same as shown in cart pag
+45) Check payment information block
+46) Check shipping information block
+47) Check price breakdown
+48) Check tax percentage 
+49) Check price total price
+50) Check Finish button 
+51) Check cancel button
 
 Checkout Complete Page - to be done
 
