@@ -1,7 +1,5 @@
 import { expect } from '@playwright/test';
 
-
-
 //This page is created to mantain all locators on the Checkout Overview page
 export class CheckoutOverviewPage {
 
@@ -58,7 +56,6 @@ async validateproductsPageHeader(){
     await expect(this.title).toBeVisible();
     await expect(this.title).toHaveText('Swag Labs');
     console.log("Title: Swag Labs is visible");
-    await expect(this.burgerMenu).toBeVisible();
     await expect(this.burgerMenu).toBeVisible();
     await expect(this.cartIcon).toBeVisible();
     await expect(this.cartBadge).toBeVisible();

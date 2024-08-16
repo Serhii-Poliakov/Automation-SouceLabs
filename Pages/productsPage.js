@@ -9,6 +9,7 @@ export class ProductsPage {
 //Header
 this.title = page.locator('.app_logo');
 this.burgerMenu = page.locator('#react-burger-menu-btn');
+this.titlePage = page.locator('span.title');
 
 //Cart
 this.cartIcon = page.locator('#shopping_cart_container');
@@ -47,6 +48,10 @@ async validateproductsPageHeader(){
     console.log("Title: Swag Labs is visible");
     await expect(this.burgerMenu).toBeVisible();
     await expect(this.cartIcon).toBeVisible();
+    await expect(this.titlePage).toBeVisible;
+    await expect(this.titlePage).toHaveText('Products');
+    console.log("Title page: Products");
+
 }
 
 // Validate cart button 

@@ -182,6 +182,6 @@ test.beforeEach(async ({ page }) => {
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedCancelButton(); 
-    await expect(productsPage.filterTitle).toBeVisible();
+    await productsPage.validateproductsPageHeader();
    });
 
