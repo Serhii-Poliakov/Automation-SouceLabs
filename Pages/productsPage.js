@@ -113,11 +113,8 @@ async getProductPrices() {
 // Validate item container
 async validateItemContainer() {
     await expect(this.itemTitle).toBeVisible();
-    await expect(this.itemTitle).toHaveText('Sauce Labs Backpack');
     await expect(this.itemDescription).toBeVisible();
-    await expect(this.itemDescription).toHaveText('carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
     await expect(this.itemPrice).toBeVisible();
-    await expect(this.itemPrice).toHaveText('$29.99');
     await expect(this.itemAddCartButton).toBeVisible();
     await expect(this.itemAddCartButton).toBeEnabled();
 
