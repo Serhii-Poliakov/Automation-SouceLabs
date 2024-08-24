@@ -58,5 +58,9 @@ test('TC:9', async({ page }) =>{
     await page.close();
   });
 
+  test.afterEach(async ({ page }) => {
+    await page.close();
+});
+
 
   

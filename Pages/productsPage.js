@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 
-//This page is created to mantain all locators on the Items page
+//This page is created to mantain all locators on the Item page
 export class ProductsPage {
 
     constructor(page) {
@@ -12,7 +12,7 @@ this.burgerMenu = page.locator('#react-burger-menu-btn');
 this.titlePage = page.locator('span.title');
 
 //Cart
-this.cartIcon = page.locator('#shopping_cart_container');
+this.cartIcon = page.locator('.shopping_cart_link');
 this.cartBadge = page.locator('.shopping_cart_badge');
 
 //Burger Menu
@@ -31,7 +31,9 @@ this.filterDropDown = page.locator('.product_sort_container');
 this.itemTitle = page.locator('#item_4_title_link');
 this.itemDescription = page.locator('//div[@class="inventory_item_desc"]').first();
 this.itemPrice = page.locator('.inventory_item_price').first();
-this.itemAddCartButton = page.locator('#add-to-cart-sauce-labs-backpack');
+this.itemName = page.locator('.inventory_item_name');
+this.itemImage = page.locator('.inventory_item_img');
+this.itemAddCartButton = page.locator('.btn.btn_primary').first();
 this.itemRemoveButton = page.locator('#remove-sauce-labs-backpack');
 
 //Footer
@@ -106,9 +108,27 @@ async sortByPriceHighToLow() {
 }
 
 async getProductPrices() {
-    const pricesText = await this.itemPrice.allTextContents();
-    return pricesText.map(price => parseFloat(price.replace('$', '')));
+    const pricesText = await this.page.$$eval('.inventory_item_price', elements => 
+        elements.map(el => parseFloat(el.textContent.replace('$', '').trim()))
+    );
+    return pricesText;
 }
+
+// Validate filter from low to high price
+async sortByPriceLowToHigh() {
+    await this.filterDropDown.selectOption('lohi'); 
+}
+
+// Validate filter from Z to A
+async sortByNameZToA() {
+    await this.filterDropDown.selectOption('za'); 
+}
+
+async getProductNames() {
+    const productNamesText = await this.itemName.allTextContents();
+    return productNamesText;
+}
+
 
 // Validate item container
 async validateItemContainer() {
@@ -117,7 +137,7 @@ async validateItemContainer() {
     await expect(this.itemPrice).toBeVisible();
     await expect(this.itemAddCartButton).toBeVisible();
     await expect(this.itemAddCartButton).toBeEnabled();
-
+    await expect((this.itemImage).nth(0)).toBeVisible();
 }
 
 // Check item title link
@@ -126,15 +146,37 @@ async validateItemTitleLink() {
     await this.itemTitle.click();
 }
 
-// Validate add to cart button
-async validatedAddToCartButton() {
+// Validate button - add item to cart 
+async validatedAddItemToCart() {
     await expect(this.itemAddCartButton).toBeVisible();
     await this.itemAddCartButton.click();
     await expect(this.cartBadge).toBeVisible();
+    await expect(this.cartBadge).toHaveText('1');
+    await expect(this.itemRemoveButton).toBeVisible();
+    await this.page.reload(); // - additional check that after page reload item will be in the cart
+    await expect(this.cartBadge).toBeVisible();
+    await expect(this.cartIcon).toBeVisible();
+    await this.cartIcon.click();
+}
+
+// Validate add 3 ites to cart button
+async validatedAddFewItemsToCart() {
+    await expect(this.itemAddCartButton).toBeVisible();
+    await this.page.locator('.btn.btn_primary').nth(0).click();
+    await expect(this.cartBadge).toHaveText('1');
+    await this.page.locator('.btn.btn_primary').nth(1).click();
+    await expect(this.cartBadge).toHaveText('2');
+    await this.page.locator('.btn.btn_primary').nth(2).click();
+    await expect(this.cartBadge).toHaveText('3');
     await expect(this.itemRemoveButton).toBeVisible();
     await this.page.reload(); // - additional check that after page reload item will be in the cart
     await expect(this.cartBadge).toBeVisible();
     await this.cartIcon.click()
+}
+
+// Validate that after adding the item to the cart, a badge counter will appear
+async validateCartBadge() {
+    await expect(this.cartBadge).toBeVisible();
 }
 
 // Validate remove from cart button
