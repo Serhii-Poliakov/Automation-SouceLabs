@@ -13,8 +13,8 @@ test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
   });
 
-  // TC: 52 - Check that header is present
-  test('TC:52', async({ page }) =>{
+  // TC: 61 - Check that header is present
+  test('TC:61', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -22,15 +22,15 @@ test.beforeEach(async ({ page }) => {
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage = new CheckoutCompletePage(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validatedAddToCartButton();
+    await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton(); 
     await checkoutCompletePage.validateproductsPageHeader(); 
   });
 
-  // TC: 53 - Check logout functionality from burger menu 
-  test('TC:53', async({ page }) =>{
+  // TC: 62 - Check logout functionality from burger menu 
+  test('TC:62', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -38,7 +38,7 @@ test.beforeEach(async ({ page }) => {
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage = new CheckoutCompletePage(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validatedAddToCartButton();
+    await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton();
@@ -46,8 +46,8 @@ test.beforeEach(async ({ page }) => {
     await loginPage.validateLoginForm();
   });
 
-  // TC: 54 Check about functionality from burger menu
-  test('TC:54', async({ page }) =>{
+  // TC: 63 Check about functionality from burger menu
+  test('TC:63', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -55,15 +55,15 @@ test.beforeEach(async ({ page }) => {
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage = new CheckoutCompletePage(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validatedAddToCartButton();
+    await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton();
     await checkoutCompletePage.validateAboutFunctionality();
   });
 
-  // TC: 55 Check item container
-  test('TC:55', async({ page }) =>{
+  // TC: 64 Check item container
+  test('TC:64', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -71,15 +71,15 @@ test.beforeEach(async ({ page }) => {
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage = new CheckoutCompletePage(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validatedAddToCartButton();
+    await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton();
     await checkoutCompletePage.validateCheckoutCompleteContainer();
   });
 
-  // TC: 56 Check Back to home functionality
-  test('TC:56', async({ page }) =>{
+  // TC: 65 Check Back to home functionality
+  test('TC:65', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -87,10 +87,30 @@ test.beforeEach(async ({ page }) => {
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage = new CheckoutCompletePage(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validatedAddToCartButton();
+    await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton();
     await checkoutCompletePage.validateBackToHomeButton();
     await productsPage.validateproductsPageHeader();
   });
+
+  // TC: 66 Check footer
+  test('TC:66', async({ page }) =>{
+    const loginPage = new LoginPage(page);
+    const productsPage = new ProductsPage(page);
+    const cartPage = new CartPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
+    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const checkoutCompletePage = new CheckoutCompletePage(page);
+    await loginPage.validateLoginWithValidCredentials();
+    await productsPage.validatedAddItemToCart();
+    await cartPage.validatedCheckoutButton();
+    await checkoutInformationPage.validateCheckoutFormWithCorrectData();
+    await сheckoutOverviewPage.validatedFinishButton(); 
+    await checkoutCompletePage.validateFooter();
+  });
+
+  test.afterEach(async ({ page }) => {
+    await page.close();
+});
