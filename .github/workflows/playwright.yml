@@ -40,12 +40,15 @@ jobs:
       - name: Run Playwright Tests
         run: |
           if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event_name }}" == "push" ]]; then
-            # Run smoke tests for scheduled runs or pushes
+            echo "Running smoke tests..."
             npx playwright test --grep "@smoke" --project=${{ matrix.browser }}
-          elif [[ "${{ github.event.inputs.testType }}" == "regression" ]]; then
-            # Run regression tests for manual trigger with testType input
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.testType }}" == "regression" ]]; then
+            echo "Running regression tests..."
             npx playwright test --grep "@regression" --project=${{ matrix.browser }}
+          else
+            echo "No matching condition for tests. Skipping."
           fi
+        shell: bash
 
       - uses: actions/upload-artifact@v4
         if: always() 
