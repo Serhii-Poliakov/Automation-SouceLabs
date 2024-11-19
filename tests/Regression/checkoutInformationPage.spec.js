@@ -7,6 +7,7 @@ import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
+test.describe('@regression, Checkout information page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
   });
@@ -141,7 +142,7 @@ test.beforeEach(async ({ page }) => {
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
-    await checkoutInformationPage.validatedContinueButton();
+    await checkoutInformationPage.validateCheckoutFormWithCorrectData();
  });
 
  // TC: 44 Check cancel functionality 
@@ -171,4 +172,5 @@ test('TC:45', async({ page }) =>{
 
 test.afterEach(async ({ page }) => {
    await page.close();
+});
 });

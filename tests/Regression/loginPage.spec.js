@@ -3,6 +3,7 @@ import { LoginPage } from '../../Pages/loginPage';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
+test.describe('@regression, Login page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
   });
@@ -61,6 +62,6 @@ test('TC:9', async({ page }) =>{
   test.afterEach(async ({ page }) => {
     await page.close();
 });
-
+});
 
   

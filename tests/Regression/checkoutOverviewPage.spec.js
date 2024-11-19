@@ -8,6 +8,7 @@ import { CheckoutOverviewPage} from '../../Pages/checkoutOverviewPage';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
+test.describe('@regression, Checkout overview page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
   });
@@ -202,4 +203,4 @@ test.beforeEach(async ({ page }) => {
   test.afterEach(async ({ page }) => {
     await page.close();
 });
-
+});
