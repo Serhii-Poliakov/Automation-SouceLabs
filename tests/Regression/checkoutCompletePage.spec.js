@@ -9,6 +9,7 @@ import { CheckoutCompletePage} from '../../Pages/checkoutCompletePage';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
+test.describe('@regression, Checkout Complete page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
   });
@@ -79,24 +80,8 @@ test.beforeEach(async ({ page }) => {
     await checkoutCompletePage.validateCheckoutCompleteContainer();
   });
 
-  // TC: 64 Check item container - to be done
+  // TC: 64 Check Back to home functionality
   test('TC:64', async({ page }) =>{
-    const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutInformationPage = new CheckoutInformationPage(page);
-    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
-    const checkoutCompletePage = new CheckoutCompletePage(page);
-    await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validatedAddItemToCart();
-    await cartPage.validatedCheckoutButton();
-    await checkoutInformationPage.validateCheckoutFormWithCorrectData();
-    await сheckoutOverviewPage.validatedFinishButton();
-    await checkoutCompletePage.validateCheckoutCompleteContainer();
-  });
-
-  // TC: 65 Check Back to home functionality
-  test('TC:65', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -112,8 +97,8 @@ test.beforeEach(async ({ page }) => {
     await productsPage.validateproductsPageHeader();
   });
 
-  // TC: 66 Check footer
-  test('TC:66', async({ page }) =>{
+  // TC: 65 Check footer
+  test('TC:65', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -130,4 +115,5 @@ test.beforeEach(async ({ page }) => {
 
   test.afterEach(async ({ page }) => {
     await page.close();
+});
 });

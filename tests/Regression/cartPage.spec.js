@@ -5,6 +5,7 @@ import { CartPage } from '../../Pages/cartPage';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
+test.describe('@regression, Cart page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
   });
@@ -104,4 +105,5 @@ test.beforeEach(async ({ page }) => {
 
   test.afterEach(async ({ page }) => {
     await page.close();
+});
 });
