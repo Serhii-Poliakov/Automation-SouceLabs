@@ -5,8 +5,8 @@ on:
     branches: [main, master] # Trigger tests on pushes to main or master branches
   pull_request:
     branches: [main, master] # Trigger tests on pull requests to main or master branches
-  schedule:
-    - cron: "0 */4 * * *" # Run smoke tests every 4 hours
+  #schedule:
+   # - cron: "0 */4 * * *" # Run smoke tests every 4 hours
   workflow_dispatch: # Allow manual trigger of the workflow
     inputs:
       testType:
