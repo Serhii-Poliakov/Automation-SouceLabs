@@ -15,14 +15,6 @@ this.titlePage = page.locator('span.title');
 this.cartIcon = page.locator('.shopping_cart_link');
 this.cartBadge = page.locator('.shopping_cart_badge');
 
-//Burger Menu
-this.burgerMenuForm = page.locator('.bm-menu');
-this.allInventary = page.locator('#inventory_sidebar_link');
-this.about = page.locator('#about_sidebar_link');
-this.logout = page.locator('#logout_sidebar_link');
-this.resetAppState = page.locator('#reset_sidebar_link');
-this.burgerMenuCloseButton = page.locator('#react-burger-cross-btn');
-
 //Filter
 this.filterTitle = page.locator('.title');
 this.filterDropDown = page.locator('.product_sort_container');
@@ -62,44 +54,6 @@ async validateCartButton() {
     await expect(this.cartIcon).toBeEnabled();
     console.log("Cart button is visible and enabled");
     await this.cartIcon.click();   
-}
-
-//Validate Burger Menu
-async validateBurgerMenu() {
-    await expect(this.burgerMenu).toBeVisible();
-    await this.burgerMenu.click();
-    await expect (this.burgerMenuForm).toBeVisible();
-    await expect(this.allInventary).toBeVisible(); // unknown functionality only checking that element is present 
-    await expect(this.about).toBeVisible();
-    await expect(this.logout).toBeVisible();
-    await expect(this.resetAppState).toBeVisible(); // unknown functionality only checking that element is present 
-    await expect(this.burgerMenuCloseButton).toBeVisible();
-    await this.burgerMenuCloseButton.click();
-    await expect(this.burgerMenuForm).toBeHidden();
-}
-
-// Validate Logout functionality
-async validateLogout() {
-    await expect(this.burgerMenu).toBeVisible();
-    await this.burgerMenu.click();
-    await expect(this.logout).toBeVisible();
-    await this.logout.click();
-}
-
-// Validate About functionality
-async validateAboutFunctionality() {
-    await expect(this.burgerMenu).toBeVisible();
-    await this.burgerMenu.click();
-    await expect(this.about).toBeVisible();
-    await this.about.click();
-    await this.page.waitForNavigation();
-    const currentUrl = this.page.url();
-    const expectedUrl = 'https://saucelabs.com/';
-    if (currentUrl === expectedUrl) {
-        console.log('The URL is expected:', currentUrl);
-      } else {
-        console.error('The URL does not match the expected URL. The resulting URL is:', currentUrl);
-      }
 }
 
 // Validate filter from high to low price
@@ -201,7 +155,7 @@ async getItemDetailsBeforeAddingToCart() {
 
 // Validate Footer
 async validateFooter() {
-    await expect(this.footerText).toHaveText('© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy');
+    await expect(this.footerText).toHaveText('© 2025 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy');
     
     //Check redirection to Twitter page
     await expect(this.twitterLink).toBeVisible();
@@ -210,7 +164,7 @@ async validateFooter() {
         this.twitterLink.click(), 
     ]);
     await newTwitterPage.waitForLoadState();
-    await expect(newTwitterPage).toHaveURL('https://x.com/saucelabs');
+    await expect(newTwitterPage).toHaveURL('https://x.com/saucelabs?mx=2');
     await newTwitterPage.close();
 
     //Check redirection to Facebook page

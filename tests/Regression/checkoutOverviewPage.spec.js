@@ -4,6 +4,7 @@ import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
 import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 import { CheckoutOverviewPage} from '../../Pages/checkoutOverviewPage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 
 const pageUrl = require('../../Data/pageUrl').default;
@@ -27,19 +28,32 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validateproductsPageHeader();
   });
 
-
   // TC: 47 - Check that burger menu is present
   test('TC:47', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
-    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
-    await сheckoutOverviewPage.validateBurgerMenu();
+    await burgerMenu.validateBurgerMenu();
+  });
+
+   //TC: XX - Check All Items functionality from burger menu
+   test('TC:XX', async({ page }) =>{
+    const loginPage = new LoginPage(page);
+    const productsPage = new ProductsPage(page);
+    const cartPage = new CartPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
+    const burgerMenu = new BurgerMenu(page);
+    await loginPage.validateLoginWithValidCredentials();
+    await productsPage.validatedAddItemToCart();
+    await cartPage.validatedCheckoutButton();
+    await checkoutInformationPage.validateCheckoutFormWithCorrectData();
+    await burgerMenu.validateAllItems();
   });
 
   // TC: 48 - Check logout functionality from burger menu
@@ -48,12 +62,12 @@ test.beforeEach(async ({ page }) => {
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
-    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
-    await сheckoutOverviewPage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginForm();
   });
 
@@ -63,12 +77,12 @@ test.beforeEach(async ({ page }) => {
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
-    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
-    await сheckoutOverviewPage.validateAboutFunctionality();
+    await burgerMenu.validateAboutFunctionality();
   });
 
    // TC: 50 Check item added from items page is same as shown in cart page

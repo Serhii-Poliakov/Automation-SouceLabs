@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../Pages/loginPage';
 import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
@@ -29,26 +30,26 @@ test.beforeEach(async ({ page }) => {
   // TC: 12 - Check burger menu form (all elements are present, close button)
   test('TC:12', async({ page }) =>{
     const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage (page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validateBurgerMenu();
+    await burgerMenu.validateBurgerMenu();
   });
 
   // TC:13 - Check logout functionality from burger menu
   test('TC:13', async({ page }) =>{
     const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginForm();
   });
 
   // TC: 14 Check about functionality from burger menu
   test('TC:14', async({ page }) =>{
     const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validateAboutFunctionality();
+    await burgerMenu.validateAboutFunctionality();
   });
 
   // TC: 15 Check filter from high to low price
@@ -120,10 +121,11 @@ test('TC:16', async ({ page }) => {
    test('TC:22', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemContainer();
     await productsPage.validatedAddItemToCart();
-    await productsPage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginWithValidCredentials();
     await expect (page.locator('.shopping_cart_badge')).toHaveText('1');
   });

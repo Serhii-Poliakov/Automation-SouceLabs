@@ -3,6 +3,7 @@ import { LoginPage } from '../../Pages/loginPage';
 import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
 import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 
 const pageUrl = require('../../Data/pageUrl').default;
@@ -29,23 +30,35 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutInformationPage = new CheckoutInformationPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
-    await checkoutInformationPage.validateBurgerMenu();
+    await burgerMenu.validateBurgerMenu();
 });
+
+  //TC: XX - Check All Items functionality from burger menu
+  test('TC:XX', async({ page }) =>{
+   const loginPage = new LoginPage(page);
+   const productsPage = new ProductsPage(page);
+   const cartPage = new CartPage(page);
+   const burgerMenu = new BurgerMenu(page);
+   await loginPage.validateLoginWithValidCredentials();
+   await productsPage.validatedAddItemToCart();
+   await cartPage.validatedCheckoutButton();
+   await burgerMenu.validateAllItems();
+ });
 
   // TC: 35 - Check logout functionality from burger menu
   test('TC:35', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutInformationPage = new CheckoutInformationPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
-    await checkoutInformationPage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginForm();
 });
 
@@ -54,11 +67,11 @@ test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
-    const checkoutInformationPage = new CheckoutInformationPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
-    await checkoutInformationPage.validateAboutFunctionality();
+    await burgerMenu.validateAboutFunctionality();
 });
 
  // TC: 37 Check checkout form

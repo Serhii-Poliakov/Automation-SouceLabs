@@ -5,6 +5,7 @@ import { CartPage } from '../../Pages/cartPage';
 import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 import { CheckoutOverviewPage} from '../../Pages/checkoutOverviewPage';
 import { CheckoutCompletePage} from '../../Pages/checkoutCompletePage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 
 const pageUrl = require('../../Data/pageUrl').default;
@@ -31,6 +32,22 @@ test.beforeEach(async ({ page }) => {
     await checkoutCompletePage.validateproductsPageHeader(); 
   });
 
+   //TC: XX - Check All Items functionality from burger menu
+   test('TC:XX', async({ page }) =>{
+    const loginPage = new LoginPage(page);
+    const productsPage = new ProductsPage(page);
+    const cartPage = new CartPage(page);
+    const checkoutInformationPage = new CheckoutInformationPage(page);
+    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const burgerMenu = new BurgerMenu(page);
+    await loginPage.validateLoginWithValidCredentials();
+    await productsPage.validatedAddItemToCart();
+    await cartPage.validatedCheckoutButton();
+    await checkoutInformationPage.validateCheckoutFormWithCorrectData();
+    await сheckoutOverviewPage.validatedFinishButton();
+    await burgerMenu.validateAllItems();
+  });
+
   // TC: 61 - Check logout functionality from burger menu 
   test('TC:61', async({ page }) =>{
     const loginPage = new LoginPage(page);
@@ -38,13 +55,13 @@ test.beforeEach(async ({ page }) => {
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
-    const checkoutCompletePage = new CheckoutCompletePage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton();
-    await checkoutCompletePage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginForm();
   });
 
@@ -55,13 +72,13 @@ test.beforeEach(async ({ page }) => {
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
-    const checkoutCompletePage = new CheckoutCompletePage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedFinishButton();
-    await checkoutCompletePage.validateAboutFunctionality();
+    await burgerMenu.validateAboutFunctionality();
   });
 
   // TC: 63 Check item container

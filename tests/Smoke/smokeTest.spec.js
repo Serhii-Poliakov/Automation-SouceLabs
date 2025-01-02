@@ -5,6 +5,7 @@ import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 import { CheckoutOverviewPage } from '../../Pages/checkoutOverviewPage';
 import { CheckoutCompletePage } from '../../Pages/checkoutCompletePage';
 import { CartPage } from '../../Pages/cartPage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
@@ -21,6 +22,7 @@ test.beforeEach(async ({ page }) => {
     const checkoutInformationPage = new CheckoutInformationPage(page);
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage = new CheckoutCompletePage(page);
+    const burgerMenu = new BurgerMenu(page);
 
     // Check login login with valid credentials
     await loginPage.validateLoginWithValidCredentials();
@@ -62,7 +64,11 @@ test.beforeEach(async ({ page }) => {
     // Check item container 
     await checkoutCompletePage.validateCheckoutCompleteContainer();
     console.log("Thank you for your order!");
-   });
+
+   // Check logout
+   await burgerMenu.validateLogout();
+   console.log("Logout is successful");
+  });
 
     test.afterEach(async ({ page }) => {
       await page.close();

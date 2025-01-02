@@ -2,7 +2,7 @@
 Project Name: Automation of Saucedemo Page Using Playwright in JavaScript
 
 Project Goal:
-To develop automated tests for the page https://www.saucedemo.com/ by creating regression (smoke, and E2E to be done) test suites. The project aims to quality of the web application through automated testing of key functionalities and user scenarios.
+To develop automated tests for the page https://www.saucedemo.com/ by creating regression (E2E to be done) test suites. The project aims to quality of the web application through automated testing of key functionalities and user scenarios.
 
 Framework and Technology:
 Programming Language: JavaScript
@@ -15,6 +15,8 @@ project-root
 │   ├── checkoutDetails.js
 │   ├── loginCredentials.js
 │   ├── pageUrl.js
+├── Helper
+│   ├──burgerMenu.js
 ├── node_modules
 ├── pages
 │   ├── cartPage.js
@@ -27,7 +29,7 @@ project-root
 ├── playwright-report
 ├── test-results
 └── tests
-│    ├── smoke -to be done
+│    ├── smoke
 │   ├── E2E -to be done
 │    └── regression
 │        ├── cartPage.spec.js

@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import { LoginPage } from '../../Pages/loginPage';
 import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
@@ -17,7 +18,7 @@ test.beforeEach(async ({ page }) => {
     const cartPage = new CartPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
-    await cartPage.validateproductsPageHeader();
+    await cartPage.validateCartPageHeader();
   });
 
 
@@ -25,20 +26,30 @@ test.beforeEach(async ({ page }) => {
   test('TC:25', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
-    await cartPage.validateBurgerMenu();
+    await burgerMenu.validateBurgerMenu();
+  });
+
+  //TC: XX - Check All Items functionality from burger menu
+  test('TC:XX', async({ page }) =>{
+    const loginPage = new LoginPage(page);
+    const productsPage = new ProductsPage(page);
+    const burgerMenu = new BurgerMenu(page);
+    await loginPage.validateLoginWithValidCredentials();
+    await productsPage.validatedAddItemToCart();
+    await burgerMenu.validateAllItems();
   });
 
   // TC: 26 - Check logout functionality from burger menu
   test('TC:26', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
-    await cartPage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginForm();
   });
 
@@ -46,10 +57,10 @@ test.beforeEach(async ({ page }) => {
   test('TC:27', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
-    await cartPage.validateAboutFunctionality();
+    await burgerMenu.validateAboutFunctionality();
   });
 
    // TC: 28 Check item added from items page is same as shown in cart page
