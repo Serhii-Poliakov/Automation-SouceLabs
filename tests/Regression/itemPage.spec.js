@@ -5,6 +5,7 @@ import { ItemPage } from '../../Pages/itemPage';
 import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 import { CheckoutOverviewPage } from '../../Pages/checkoutOverviewPage';
 import { CartPage } from '../../Pages/cartPage';
+import { BurgerMenu } from '../../Helper/burgerMenu';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
@@ -27,20 +28,30 @@ test.beforeEach(async ({ page }) => {
   test('TC:67', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const itemPage = new ItemPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemTitleLink();
-    await itemPage.validateBurgerMenu();
+    await burgerMenu.validateBurgerMenu();
+  });
+
+   //TC: XX - Check All Items functionality from burger menu
+   test('TC:XX', async({ page }) =>{
+    const loginPage = new LoginPage(page);
+    const productsPage = new ProductsPage(page);
+    const burgerMenu = new BurgerMenu(page);
+    await loginPage.validateLoginWithValidCredentials();
+    await productsPage.validateItemTitleLink();
+    await burgerMenu.validateAllItems();
   });
 
   // TC: 68 - Check logout functionality from burger menu
   test('TC:68', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const itemPage = new ItemPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemTitleLink();
-    await itemPage.validateLogout();
+    await burgerMenu.validateLogout();
     await loginPage.validateLoginForm();
   });
 
@@ -48,10 +59,10 @@ test.beforeEach(async ({ page }) => {
   test('TC:69', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const itemPage = new ItemPage(page);
+    const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemTitleLink();
-    await itemPage.validateAboutFunctionality();
+    await burgerMenu.validateAboutFunctionality();
   });
 
    // TC: 70 Check added item from product page is same as shown in item page
