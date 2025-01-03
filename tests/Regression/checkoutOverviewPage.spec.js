@@ -5,6 +5,7 @@ import { CartPage } from '../../Pages/cartPage';
 import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 import { CheckoutOverviewPage} from '../../Pages/checkoutOverviewPage';
 import { BurgerMenu } from '../../Helper/burgerMenu';
+import { Footer } from '../../Helper/footer';
 
 
 const pageUrl = require('../../Data/pageUrl').default;
@@ -12,6 +13,7 @@ const pageUrl = require('../../Data/pageUrl').default;
 test.describe('@regression, Checkout overview page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
+    await page.waitForLoadState('networkidle');
   });
 
   // TC: 46 - Check that header is present
@@ -206,12 +208,12 @@ test.beforeEach(async ({ page }) => {
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
-    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const footer = new Footer(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
-    await сheckoutOverviewPage.validateFooter();
+    await footer.validateFooter();
   });
 
   test.afterEach(async ({ page }) => {

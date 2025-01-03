@@ -6,6 +6,7 @@ const pageUrl = require('../../Data/pageUrl').default;
 test.describe('@regression, Login page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
+    await page.waitForLoadState('networkidle');
   });
   
 // TC:1 - Check that header logo is present
