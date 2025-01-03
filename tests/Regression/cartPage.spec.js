@@ -3,12 +3,14 @@ import { LoginPage } from '../../Pages/loginPage';
 import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
 import { BurgerMenu } from '../../Helper/burgerMenu';
+import { Footer } from '../../Helper/footer';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
 test.describe('@regression, Cart page', () => {
 test.beforeEach(async ({ page }) => {
     await page.goto(pageUrl.swagLabs);
+    await page.waitForLoadState('networkidle');
   });
 
   // TC: 24 - Check that header is present
@@ -108,10 +110,10 @@ test.beforeEach(async ({ page }) => {
   test('TC:32', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const cartPage = new CartPage(page);
+    const footer = new Footer(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
-    await cartPage.validateFooter();
+    await footer.validateFooter();
   });
 
   test.afterEach(async ({ page }) => {

@@ -17,6 +17,7 @@ project-root
 │   ├── pageUrl.js
 ├── Helper
 │   ├──burgerMenu.js
+│   ├──footer.js
 ├── node_modules
 ├── pages
 │   ├── cartPage.js
@@ -59,6 +60,9 @@ Implementation Steps:
     - Set up the environment for test execution.
 3) Creation and Execution of Test Suites:
     - Develop regression, smoke, and E2E test suites.
+4) How to run tests using tags:
+    - Regression: npx playwright test --grep "@regression"
+    - Smoke: npx playwright test --grep "@smoke"
 
 
     Automation Checklist:
