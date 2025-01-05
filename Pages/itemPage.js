@@ -6,11 +6,6 @@ export class ItemPage {
     constructor(page) {
         this.page = page;
 
-//Header
-this.title = page.locator('.app_logo');
-this.burgerMenu = page.locator('#react-burger-menu-btn');
-this.checkoutTitle = page.locator('.title');
-
 //Cart
 this.cartContainer = page.locator('.cart_item');
 this.cartIcon = page.locator('#shopping_cart_container');

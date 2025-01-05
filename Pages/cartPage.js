@@ -6,13 +6,6 @@ export class CartPage {
     constructor(page) {
         this.page = page;
 
-//Header
-this.title = page.locator('.app_logo');
-this.burgerMenu = page.locator('#react-burger-menu-btn');
-this.cartTitle = page.locator('.title');
-this.qty = page.locator('.cart_quantity_label');
-this.decription = page.locator('.cart_desc_label');
-
 //Cart
 this.cartContainer = page.locator('.cart_item');
 this.cartIcon = page.locator('#shopping_cart_container');
@@ -31,21 +24,6 @@ this.continueShoppingButton = page.locator('#continue-shopping');
 
 //Checkout button
 this.checkoutButton = page.locator('#checkout');
-}
-
-// Validate the header content on this page
-async validateCartPageHeader(){
-    await expect(this.title).toBeVisible();
-    await expect(this.title).toHaveText('Swag Labs');
-    console.log("Title: Swag Labs is visible");
-    await expect(this.cartTitle).toHaveText("Your Cart")
-    console.log("Title: Your Page");
-    await expect(this.burgerMenu).toBeVisible();
-    await expect(this.burgerMenu).toBeVisible();
-    await expect(this.cartIcon).toBeVisible();
-    await expect(this.cartBadge).toBeVisible();
-    await expect(this.qty).toBeVisible();
-    await expect(this.decription).toBeVisible();
 }
 
 // Verify if item added from items page is same as shown in cart page

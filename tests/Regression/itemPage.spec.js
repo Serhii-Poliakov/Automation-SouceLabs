@@ -7,6 +7,7 @@ import { CheckoutOverviewPage } from '../../Pages/checkoutOverviewPage';
 import { CartPage } from '../../Pages/cartPage';
 import { BurgerMenu } from '../../Helper/burgerMenu';
 import { Footer } from '../../Helper/footer';
+import { Header } from '../../Helper/header';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
@@ -16,18 +17,23 @@ test.beforeEach(async ({ page }) => {
     await page.waitForLoadState('networkidle');
   });
 
- // TC: 66 - Check that header is present
- test('TC:66', async({ page }) =>{
+  // TC: 90 - Check that header is present
+  // TC: 91 - Check that cart badge is hidden
+  // TC: 92 - Check Check that filter is hidden
+  // TC: 93 - Check that quantity icon is hidden
+  // TC: 94 - Check that page title is hidden
+ test('TC:90, 91, 92, 93, 94', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
-    const itemPage = new ItemPage(page);
+    const header = new Header(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemTitleLink();
-    await itemPage.validateItemPageHeader();
+    await expect(header.pageTitle).toBeHidden();
+    await header.validateHeader();
   });
 
-  // TC: 67 - Check that burger menu is present
-  test('TC:67', async({ page }) =>{
+  // TC: 95 - Check that burger menu is present
+  test('TC:95', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const burgerMenu = new BurgerMenu(page);
@@ -36,8 +42,8 @@ test.beforeEach(async ({ page }) => {
     await burgerMenu.validateBurgerMenu();
   });
 
-   //TC: XX - Check All Items functionality from burger menu
-   test('TC:XX', async({ page }) =>{
+   //TC: 96 - Check All Items functionality from burger menu
+   test('TC:96', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const burgerMenu = new BurgerMenu(page);
@@ -46,8 +52,8 @@ test.beforeEach(async ({ page }) => {
     await burgerMenu.validateAllItems();
   });
 
-  // TC: 68 - Check logout functionality from burger menu
-  test('TC:68', async({ page }) =>{
+  // TC: 97 - Check logout functionality from burger menu
+  test('TC:97', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const burgerMenu = new BurgerMenu(page);
@@ -57,8 +63,8 @@ test.beforeEach(async ({ page }) => {
     await loginPage.validateLoginForm();
   });
 
-  // TC: 69 Check about functionality from burger menu
-  test('TC:69', async({ page }) =>{
+  // TC: 98 Check about functionality from burger menu
+  test('TC:98', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const burgerMenu = new BurgerMenu(page);
@@ -67,8 +73,8 @@ test.beforeEach(async ({ page }) => {
     await burgerMenu.validateAboutFunctionality();
   });
 
-   // TC: 70 Check added item from product page is same as shown in item page
-   test('TC:70', async({ page }) =>{
+   // TC: 99 Check added item from product page is same as shown in item page
+   test('TC:99', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const itemPage = new ItemPage(page);
@@ -79,8 +85,8 @@ test.beforeEach(async ({ page }) => {
     await expect(actualItemDetails).toEqual(expectedItemDetails);
    });
 
-    // TC: 71 Check added item from checkout overview page is same as shown in owerview page
-    test('TC:71', async({ page }) =>{
+    // TC: 100 Check added item from checkout overview page is same as shown in owerview page
+    test('TC:100', async({ page }) =>{
       const loginPage = new LoginPage(page);
       const productsPage = new ProductsPage(page);
       const cartPage = new CartPage(page);
@@ -97,8 +103,8 @@ test.beforeEach(async ({ page }) => {
       await expect(actualItemDetails).toEqual(expectedItemDetails);
      });
 
-    // TC: 72 Check add to cart button
-  test('TC:72', async({ page }) =>{
+  // TC: 101 Check add to cart button
+  test('TC:101', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const itemPage = new ItemPage(page);
@@ -108,32 +114,33 @@ test.beforeEach(async ({ page }) => {
     await itemPage.validateCartBadge();
   });
 
-   // TC: 73 Check go back to products page button
-   test('TC:73', async({ page }) =>{
+   // TC: 102 Check go back to products page button
+   test('TC:102', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const itemPage = new ItemPage(page);
+    const header = new Header(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemTitleLink();
     await itemPage.validatedbackToProductsButton();
-    await productsPage.validateproductsPageHeader();
+    await header.validateHeader();
   });
 
-  // TC: 74 Check if user add item to the cart and then go back to products page - badge counter will should be visible
-  test('TC:74', async({ page }) =>{
+  // TC: 103 Check if user add item to the cart and then go back to products page - badge counter will should be visible
+  test('TC:103', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const itemPage = new ItemPage(page);
+    const header = new Header(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateItemTitleLink();
     await itemPage.validatedAddCartButton();
     await itemPage.validatedbackToProductsButton();
-    await productsPage.validateproductsPageHeader();
     await productsPage.validateCartBadge();
   });
 
-   // TC: 75 Check footer
-  test('TC:75', async({ page }) =>{
+   // TC: 104 Check footer
+  test('TC:104', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const footer = new Footer(page);

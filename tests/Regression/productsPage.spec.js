@@ -4,6 +4,7 @@ import { ProductsPage } from '../../Pages/productsPage';
 import { CartPage } from '../../Pages/cartPage';
 import { BurgerMenu } from '../../Helper/burgerMenu';
 import { Footer } from '../../Helper/footer';
+import { Header } from '../../Helper/header';
 
 const pageUrl = require('../../Data/pageUrl').default;
 
@@ -14,31 +15,36 @@ test.beforeEach(async ({ page }) => {
   });
 
 // TC: 10 - Check that header is present
-  test('TC:10', async({ page }) =>{
+// TC: 11 - Check that cart badge is hidden 
+// TC: 12 - Check that filter is present
+// TC: 13 - Check that quantity icon is hidden
+// TC: 14 - Check that page title is present
+  test('TC:10, 11, 12, 13, 14', async({ page }) =>{
     const loginPage = new LoginPage(page);
-    const productsPage = new ProductsPage(page);
+    const header = new Header(page);
     await loginPage.validateLoginWithValidCredentials();
-    await productsPage.validateproductsPageHeader();
+    await expect(header.pageTitle).toHaveText('Products');
+    await header.validateHeader();
   });
 
-  // TC: 11 - Check cart button is available
-  test('TC:11', async({ page }) =>{
+  // TC: 15 - Check cart button is available
+  test('TC:15', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validateCartButton();
   });
 
-  // TC: 12 - Check burger menu form (all elements are present, close button)
-  test('TC:12', async({ page }) =>{
+  // TC: 16 - Check burger menu form (all elements are present, close button)
+  test('TC:16', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await burgerMenu.validateBurgerMenu();
   });
 
-  // TC:13 - Check logout functionality from burger menu
-  test('TC:13', async({ page }) =>{
+  // TC:17 - Check logout functionality from burger menu
+  test('TC:17', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
@@ -46,16 +52,16 @@ test.beforeEach(async ({ page }) => {
     await loginPage.validateLoginForm();
   });
 
-  // TC: 14 Check about functionality from burger menu
-  test('TC:14', async({ page }) =>{
+  // TC: 18 Check about functionality from burger menu
+  test('TC:18', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const burgerMenu = new BurgerMenu(page);
     await loginPage.validateLoginWithValidCredentials();
     await burgerMenu.validateAboutFunctionality();
   });
 
-  // TC: 15 Check filter from high to low price
-  test('TC:15', async ({ page }) => {
+  // TC: 19 Check filter from high to low price
+  test('TC:19', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     await loginPage.validateLoginWithValidCredentials();
@@ -65,8 +71,8 @@ test.beforeEach(async ({ page }) => {
         expect(prices[i]).toBeGreaterThanOrEqual(prices[i + 1]);
     }
 });
-  // TC: 16 Check filter from Z to A
-test('TC:16', async ({ page }) => {
+  // TC: 20 Check filter from Z to A
+test('TC:20', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const productsPage = new ProductsPage(page);
   await loginPage.validateLoginWithValidCredentials();
@@ -77,8 +83,8 @@ test('TC:16', async ({ page }) => {
   }
 });
 
- // TC: 17 Check filter from low to high
- test('TC:17', async ({ page }) => {
+ // TC: 21 Check filter from low to high
+ test('TC:21', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const productsPage = new ProductsPage(page);
   await loginPage.validateLoginWithValidCredentials();
@@ -89,9 +95,9 @@ test('TC:16', async ({ page }) => {
 }
 });
 
-  // TC:18 Check first item details
-  // TC:19 Check add item to cart
-  test('TC:18, 19', async({ page }) =>{
+  // TC:22 Check first item details
+  // TC:23 Check add item to cart
+  test('TC:22, 23', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     await loginPage.validateLoginWithValidCredentials();
@@ -99,8 +105,8 @@ test('TC:16', async ({ page }) => {
     await productsPage.validatedAddItemToCart();
   });
 
-  //TC:20 Check that user has posibility to add few items to the cart
-  test('TC:20', async({ page }) =>{
+  // TC:24 Check that user has posibility to add few items to the cart
+  test('TC:24', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -110,8 +116,8 @@ test('TC:16', async ({ page }) => {
     await cartPage.validatedFewItemsInTheCart();
   });
 
-  // TC:21 Check remove item from cart
-  test('TC:21', async({ page }) =>{
+  // TC:25 Check remove item from cart
+  test('TC:25', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     await loginPage.validateLoginWithValidCredentials();
@@ -119,8 +125,8 @@ test('TC:16', async ({ page }) => {
     await productsPage.validatedRemoveFromCartButton();
   });
 
-   // TC:22 Check that after relogin, item will be in the cart
-   test('TC:22', async({ page }) =>{
+   // TC:26 Check that after relogin, item will be in the cart
+   test('TC:26', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const burgerMenu = new BurgerMenu(page);
@@ -132,8 +138,8 @@ test('TC:16', async ({ page }) => {
     await expect (page.locator('.shopping_cart_badge')).toHaveText('1');
   });
 
-  // TC: 23 Check footer
-  test('TC:23', async({ page }) =>{
+  // TC: 27 Check footer
+  test('TC:27', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const footer = new Footer(page);
     await loginPage.validateLoginWithValidCredentials();
