@@ -6,11 +6,6 @@ export class CheckoutCompletePage {
     constructor(page) {
         this.page = page;
 
-//Header
-this.title = page.locator('.app_logo');
-this.burgerMenu = page.locator('#react-burger-menu-btn');
-this.checkoutTitle = page.locator('.title');
-
 //Cart
 this.cartIcon = page.locator('#shopping_cart_container');
 this.cartBadge = page.locator('.shopping_cart_badge');
@@ -26,17 +21,6 @@ this.orderDispatchedText = page.locator('.complete-text');
 
 //Back home button
 this.backHomeButton = page.locator('#back-to-products');
-}
-
-
-// Validate the header content on this page
-async validateproductsPageHeader(){
-    await expect(this.title).toBeVisible();
-    await expect(this.title).toHaveText('Swag Labs');
-    console.log("Title: Swag Labs is visible");
-    await expect(this.burgerMenu).toBeVisible();
-    await expect(this.cartIcon).toBeVisible();
-    await expect(this.cartBadge).toBeHidden();
 }
 
 // Validate checkout complete container

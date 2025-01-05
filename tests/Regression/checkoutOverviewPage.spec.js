@@ -6,6 +6,7 @@ import { CheckoutInformationPage } from '../../Pages/checkoutInformationPage';
 import { CheckoutOverviewPage} from '../../Pages/checkoutOverviewPage';
 import { BurgerMenu } from '../../Helper/burgerMenu';
 import { Footer } from '../../Helper/footer';
+import { Header } from '../../Helper/header';
 
 
 const pageUrl = require('../../Data/pageUrl').default;
@@ -16,22 +17,27 @@ test.beforeEach(async ({ page }) => {
     await page.waitForLoadState('networkidle');
   });
 
-  // TC: 46 - Check that header is present
-  test('TC:46', async({ page }) =>{
+  // TC: 60 - Check that header is present
+  // TC: 61 - Check that cart badge is present
+  // TC: 62 - Check that filter is hidden
+  // TC: 63 - Check that quantity icon is visible
+  // TC: 64 - Check that page title is present
+  test('TC: 60, 61, 62, 63, 64', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
-    const сheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const header = new Header(page);
     await loginPage.validateLoginWithValidCredentials();
     await productsPage.validatedAddItemToCart();
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
-    await сheckoutOverviewPage.validateproductsPageHeader();
+    await expect(header.pageTitle).toHaveText('Checkout: Overview');
+    await header.validateHeader();
   });
 
-  // TC: 47 - Check that burger menu is present
-  test('TC:47', async({ page }) =>{
+  // TC: 65 - Check that burger menu is present
+  test('TC:65', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -44,8 +50,8 @@ test.beforeEach(async ({ page }) => {
     await burgerMenu.validateBurgerMenu();
   });
 
-   //TC: XX - Check All Items functionality from burger menu
-   test('TC:XX', async({ page }) =>{
+   //TC: 66 - Check All Items functionality from burger menu
+   test('TC:66', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -58,8 +64,8 @@ test.beforeEach(async ({ page }) => {
     await burgerMenu.validateAllItems();
   });
 
-  // TC: 48 - Check logout functionality from burger menu
-  test('TC:48', async({ page }) =>{
+  // TC: 67 - Check logout functionality from burger menu
+  test('TC:67', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -73,8 +79,8 @@ test.beforeEach(async ({ page }) => {
     await loginPage.validateLoginForm();
   });
 
-  // TC: 49 Check about functionality from burger menu
-  test('TC:49', async({ page }) =>{
+  // TC: 68 Check about functionality from burger menu
+  test('TC:68', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -87,8 +93,8 @@ test.beforeEach(async ({ page }) => {
     await burgerMenu.validateAboutFunctionality();
   });
 
-   // TC: 50 Check item added from items page is same as shown in cart page
-   test('TC:50', async({ page }) =>{
+   // TC: 69 Check item added from items page is same as shown in cart page
+   test('TC:69', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -103,8 +109,8 @@ test.beforeEach(async ({ page }) => {
     await expect(actualItemDetails).toEqual(expectedItemDetails);
    });
 
-   // TC: 51 Check payment information block
-   test('TC:51', async({ page }) =>{
+   // TC: 70 Check payment information block
+   test('TC:70', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -117,8 +123,8 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validatePaymentInformation(); 
    });
 
-   // TC: 52 Check shipping information block
-   test('TC:52', async({ page }) =>{
+   // TC: 71 Check shipping information block
+   test('TC:71', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -131,8 +137,8 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validateShipingInformation(); 
    });
 
-   // TC: 53 Check price breakdown
-   test('TC:53', async({ page }) =>{
+   // TC: 72 Check price breakdown
+   test('TC:72', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -145,8 +151,8 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validatePriceBreakdown(); 
    });
 
-   // TC: 54 Check tax percentage 
-   test('TC:54', async({ page }) =>{
+   // TC: 73 Check tax percentage 
+   test('TC:73', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -159,8 +165,8 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validateTaxPercentage(); 
    });
 
-   // TC: 55 Check price total price
-   test('TC:55', async({ page }) =>{
+   // TC: 74 Check price total price
+   test('TC:74', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -173,8 +179,8 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validateTotalPrice(); 
    });
 
-   // TC: 56 Check Finish button 
-   test('TC:56', async({ page }) =>{
+   // TC: 75 Check Finish button 
+   test('TC:75', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
@@ -187,11 +193,12 @@ test.beforeEach(async ({ page }) => {
     await сheckoutOverviewPage.validatedFinishButton(); 
    });
 
-   // TC: 57 Check cancel button
-   test('TC:57', async({ page }) =>{
+   // TC: 76 Check cancel button
+   test('TC:76', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
+    const header= new Header(page);
     const checkoutInformationPage = new CheckoutInformationPage(page);
     const сheckoutOverviewPage = new CheckoutOverviewPage(page);
     await loginPage.validateLoginWithValidCredentials();
@@ -199,11 +206,11 @@ test.beforeEach(async ({ page }) => {
     await cartPage.validatedCheckoutButton();
     await checkoutInformationPage.validateCheckoutFormWithCorrectData();
     await сheckoutOverviewPage.validatedCancelButton(); 
-    await productsPage.validateproductsPageHeader();
+    await header.redirectionToProductsPage();
    });
 
-        // TC: 58 Check footer
-  test('TC:58', async({ page }) =>{
+  // TC: 77 Check footer
+  test('TC:77', async({ page }) =>{
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);

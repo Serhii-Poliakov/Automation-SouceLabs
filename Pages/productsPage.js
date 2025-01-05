@@ -6,11 +6,6 @@ export class ProductsPage {
     constructor(page) {
         this.page = page;
 
-//Header
-this.title = page.locator('.app_logo');
-this.burgerMenu = page.locator('#react-burger-menu-btn');
-this.titlePage = page.locator('span.title');
-
 //Cart
 this.cartIcon = page.locator('.shopping_cart_link');
 this.cartBadge = page.locator('.shopping_cart_badge');
@@ -27,19 +22,6 @@ this.itemName = page.locator('.inventory_item_name');
 this.itemImage = page.locator('.inventory_item_img');
 this.itemAddCartButton = page.locator('.btn.btn_primary').first();
 this.itemRemoveButton = page.locator('#remove-sauce-labs-backpack');
-}
-
-// Validate the header content on the item page
-async validateproductsPageHeader(){
-    await expect(this.title).toBeVisible();
-    await expect(this.title).toHaveText('Swag Labs');
-    console.log("Title: Swag Labs is visible");
-    await expect(this.burgerMenu).toBeVisible();
-    await expect(this.cartIcon).toBeVisible();
-    await expect(this.titlePage).toBeVisible;
-    await expect(this.titlePage).toHaveText('Products');
-    console.log("Title page: Products");
-
 }
 
 // Validate cart button 
@@ -76,7 +58,6 @@ async getProductNames() {
     const productNamesText = await this.itemName.allTextContents();
     return productNamesText;
 }
-
 
 // Validate item container
 async validateItemContainer() {
